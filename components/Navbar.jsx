@@ -3,7 +3,7 @@ import Link from "next/link";
 import NavLink from "./NavLink";
 import { useState } from "react";
 import { FaBars, FaXmark } from "react-icons/fa6";
-
+import MenuOverlay from "./MenuOverlay";
 
 const navLinks = [
   { path: "#about", title: "About" },
@@ -15,7 +15,7 @@ export default function Navbar() {
   const [navBarOpen, setNavBarOpen] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-90">
+    <nav className="fixed top-0 left-0 right-0 z-10 bg-[#121212] bg-opacity-100">
       <div className="flex flex-wrap items-center justify-between mx-auto px-4 py-2">
         <Link
           href={"/"}
@@ -25,11 +25,17 @@ export default function Navbar() {
         </Link>
         <div className="mobile-menu block md:hidden">
           {!navBarOpen ? (
-            <button onClick={() => setNavBarOpen(true)} className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white">
+            <button
+              onClick={() => setNavBarOpen(true)}
+              className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
+            >
               <FaBars className="h-5 w-5" />
             </button>
           ) : (
-            <button onClick={() => setNavBarOpen(false)} className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white">
+            <button
+              onClick={() => setNavBarOpen(false)}
+              className="flex items-center px-3 py-2 border rounded border-slate-200 text-slate-200 hover:text-white hover:border-white"
+            >
               <FaXmark className="h-5 w-5" />
             </button>
           )}
@@ -44,6 +50,7 @@ export default function Navbar() {
           </ul>
         </div>
       </div>
+      {navBarOpen ? <MenuOverlay links={navLinks} /> : null}
     </nav>
   );
 }
