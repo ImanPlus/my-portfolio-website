@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function TabButton({ active, selectTab, children }) {
+interface TabButtonProps {
+    active: boolean;
+    selectTab: () => void;
+    children: React.ReactNode;
+}
+export default function TabButton({ active, selectTab, children }: TabButtonProps) {
   const buttonClasses = active
     ? "text-white border-b border-purple-500"
     : "text-[#ADB7BE]";
